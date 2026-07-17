@@ -21,3 +21,10 @@ const server = createServer(async (req, res) => {
   res.setHeader('Content-Type', 'application/json')
   res.end(JSON.stringify(userList))
 })
+
+const host = 'localhost'
+const port = 3000
+
+server.listen(port, host, () => {
+  console.log(`listening on http://${host}:${port}`)
+})
