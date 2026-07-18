@@ -1,3 +1,4 @@
+import mongoose from 'mongoose'
 import { initDatabase } from './db/init.js'
 import { Post } from './db/models/post.js'
 
@@ -13,7 +14,9 @@ const doc = new Post({
 })
 
 //este es un insert
-await doc.save()
+const createdPost = await doc.save()
+
+await Post.findByIdAndUpdate(createdPost.id, { $set: { title: 'Alejandro' } })
 
 //este es un read documentos, colleccion
 const posts = await Post.find()
