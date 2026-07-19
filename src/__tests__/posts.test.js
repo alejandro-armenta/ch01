@@ -1,6 +1,7 @@
 import { describe, expect, test, beforeEach } from '@jest/globals'
 import {
   createPost,
+  deletePost,
   getPostByID,
   listAllPosts,
   listPostsByAuthor,
@@ -149,5 +150,35 @@ describe('updating posts', () => {
     await updatePost(createdSamplePosts[0]._id, { author: 'Test Author' })
     const updatedPost = await Post.findById(createdSamplePosts[0]._id)
     expect(updatedPost.title).toEqual('Learning Redux')
+  })
+
+  test('should update the updatedAt timestamp', async () => {
+    await updatePost(createdSamplePosts[0]._id, { author: 'Test Author' })
+    const updatedPost = await Post.findById(createdSamplePosts[0]._id)
+    expect(updatedPost.updatedAt.getTime()).toBeGreaterThan(
+      createdSamplePosts[0].updatedAt.getTime(),
+    )
+  })
+
+  test('should fail if the id does not exist', async () => {
+    const post = await updatePost('000000000000000000000000', {
+      author: 'Test Author',
+    })
+
+    expect(post).toEqual(null)
+  })
+})
+
+describe('deleting posts', () => {
+  test('should remove the post from the database', async () => {
+    const result = await deletePost(createdSamplePosts[0]._id)
+    expect(result.deletedCount).toEqual(1)
+    const deletedPost = await Post.findById(createdSamplePosts[0]._id)
+    expect(deletedPost).toEqual(null)
+  })
+
+  test('should fail if the id does not exist', async () => {
+    const result = await deletePost('000000000000000000000000')
+    expect(result.deletedCount).toEqual(0)
   })
 })
