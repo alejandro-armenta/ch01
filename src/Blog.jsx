@@ -1,0 +1,48 @@
+import { useQuery } from '@tanstack/react-query'
+import { CreatePost } from './components/CreatePost'
+import { Post } from './components/Post'
+import { PostFilter } from './components/PostFilter'
+import { PostList } from './components/PostList'
+import { PostSorting } from './components/PostSorting'
+import { getPosts } from './api/posts'
+import { useState } from 'react'
+
+export function Blog() {
+  const [author, setAuthor] = useState('')
+  const [sortBy, setSortBy] = useState('createdAt')
+  const [sortOrder, setSortOrder] = useState('descending')
+
+  //trigerear un renderizado cuando llega la data?
+  const result = useQuery({
+    queryKey: ['posts', { author, sortBy, sortOrder }],
+    queryFn: () => getPosts({ author, sortBy, sortOrder }),
+  })
+
+  const posts = result.data ?? []
+
+  return (
+    <>
+      <div style={{ padding: 8 }}>
+        <CreatePost />
+        <br />
+        <hr />
+        Filter by:
+        <PostFilter
+          field='author'
+          value={author}
+          onChange={(value) => setAuthor(value)}
+        />
+        <br />
+        <PostSorting
+          fields={['createdAt', 'updatedAt']}
+          value={sortBy}
+          onChange={(value) => setSortBy(value)}
+          orderValue={sortOrder}
+          onOrderChange={(value) => setSortOrder(value)}
+        />
+        <hr />
+        <PostList posts={posts} />
+      </div>
+    </>
+  )
+}
