@@ -1,16 +1,30 @@
-# React + Vite
+# Modern Full-Stack React Projects / Chapter 1
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+_Preparing For Full-Stack Development_
 
-Currently, two official plugins are available:
+## Requirements
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Please install the following, if you do not already have them installed:
 
-## React Compiler
+- Node.js v20.10.0
+- Git v2.43.0
+- Visual Studio Code v1.84.2
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+The versions listed above are the ones used in the book. While installing a newer version should not be an issue, please note that certain steps might work differently on a newer version. If you are having an issue with the code and steps provided in this book, please try using the mentioned versions.
 
-## Expanding the ESLint configuration
+## Install
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+If you cloned the full repository for the book, Husky may not find the `.git` directory when running `npm install`. In that case, just run `git init` in the root of the corresponding chapter folder.
+
+```bash
+git init
+npm install
+```
+
+## Start
+
+To start the app in development mode, run the following command:
+
+```bash
+npm run dev
+```
