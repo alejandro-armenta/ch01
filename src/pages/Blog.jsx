@@ -5,13 +5,13 @@ import { PostFilter } from '../components/PostFilter'
 import { PostList } from '../components/PostList'
 import { PostSorting } from '../components/PostSorting'
 import { getPosts } from '../api/posts'
+import { Header } from '../components/Header'
 
 export function Blog() {
   const [author, setAuthor] = useState('')
   const [sortBy, setSortBy] = useState('createdAt')
   const [sortOrder, setSortOrder] = useState('descending')
 
-  //trigerear un renderizado cuando llega la data?
   const result = useQuery({
     queryKey: ['posts', { author, sortBy, sortOrder }],
     queryFn: () => getPosts({ author, sortBy, sortOrder }),
@@ -22,6 +22,10 @@ export function Blog() {
   return (
     <>
       <div style={{ padding: 8 }}>
+        <Header />
+        <br />
+        <hr />
+        <br />
         <CreatePost />
         <br />
         <hr />
